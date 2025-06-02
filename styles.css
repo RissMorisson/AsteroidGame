@@ -1,0 +1,278 @@
+body {
+  margin: 0;
+  background-color: #000;
+  color: #0f0; /* Neon green for text */
+  font-family: 'Courier New', Courier, monospace; /* Retro font */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh; /* Ensure full viewport height */
+  overflow: hidden;
+}
+
+#game-container {
+  width: 800px;
+  height: 600px;
+  background-color: #080815; /* Dark space blue */
+  border: 2px solid #0f0;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 20px #0f0;
+  margin: 20px 0; /* Add some top/bottom margin */
+}
+
+#starfield {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden; /* Crucial for parallax */
+}
+
+.star {
+  position: absolute;
+  background-color: #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 5px #fff;
+}
+
+#spaceship {
+  width: 30px;
+  height: 40px;
+  position: absolute;
+  /* A simple triangle shape for the spaceship body */
+  background-color: transparent;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-bottom: 40px solid #00f0ff; /* Neon cyan */
+  filter: drop-shadow(0 0 3px #00f0ff);
+  transition: transform 0.1s linear; /* For rotation */
+  transform-origin: center center;
+}
+
+#propellant {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  /* Initially hidden, JS will show and adjust height */
+  border-bottom: 0px solid #ff8c00; /* Orange flame */
+  position: absolute;
+  bottom: -20px; /* Positioned at the base of the spaceship */
+  left: 50%;
+  transform: translateX(-50%);
+  filter: drop-shadow(0 0 5px #ff8c00);
+  transition: border-bottom-width 0.1s ease-out, border-bottom-color 0.1s;
+}
+
+.asteroid {
+  position: absolute;
+  background-color: #8B4513; /* Brownish */
+  border: 1px solid #A0522D; /* Sienna border */
+  border-radius: 20%; /* Slightly irregular shape */
+  box-shadow: inset 0 0 10px #502000;
+  transition: transform 0.1s linear; /* For smooth movement */
+}
+
+.fragment {
+  position: absolute;
+  background-color: #A0522D; /* Lighter brown for fragments */
+  border: 1px solid #8B4513;
+  border-radius: 30%;
+  box-shadow: inset 0 0 5px #502000;
+  transition: transform 0.1s linear;
+}
+
+.laser-beam {
+  position: absolute;
+  width: 4px;
+  height: 20px;
+  background-color: #ff00ff; /* Magenta laser */
+  box-shadow: 0 0 10px #ff00ff;
+  border-radius: 2px;
+}
+
+#ui-container {
+  display: flex;
+  justify-content: space-around;
+  width: 800px;
+  padding: 10px 0;
+  background-color: #111;
+  border-left: 2px solid #0f0;
+  border-right: 2px solid #0f0;
+  border-bottom: 2px solid #0f0;
+  box-shadow: 0 5px 15px #0f0;
+  margin-bottom: 20px;
+}
+
+.ui-panel {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#laser-cooldown-container {
+  width: 100px;
+  height: 15px;
+  background-color: #333;
+  border: 1px solid #0f0;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+#laser-cooldown-bar {
+  width: 100%; /* Full at start */
+  height: 100%;
+  background-color: #00f0ff; /* Neon cyan, like spaceship */
+  transition: width 0.1s linear;
+}
+
+#hyperspace-button {
+  background-color: #333;
+  color: #0f0;
+  border: 1px solid #0f0;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-family: 'Courier New', Courier, monospace;
+}
+#hyperspace-button:hover {
+  background-color: #0f0;
+  color: #000;
+}
+#hyperspace-button:disabled {
+  background-color: #222;
+  color: #555;
+  border-color: #555;
+  cursor: not-allowed;
+}
+
+
+#game-over-screen {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.85);
+  padding: 40px;
+  border: 2px solid #ff0000; /* Red for game over */
+  box-shadow: 0 0 20px #ff0000;
+  text-align: center;
+  z-index: 100;
+}
+
+#game-over-screen h1 {
+  color: #ff0000;
+  margin-top: 0;
+}
+
+#game-over-screen p {
+  font-size: 1.2em;
+}
+
+#restart-button {
+  padding: 10px 20px;
+  font-size: 1em;
+  background-color: #0f0;
+  color: #000;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+#restart-button:hover {
+  background-color: #fff;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* --- Media Query for Mobile Devices --- */
+@media (max-width: 768px) {
+  body {
+      padding: 10px; /* Add some padding around the content */
+  }
+
+  #game-container {
+      width: 95%; /* Make game container take up more screen width */
+      height: auto; /* Adjust height automatically based on width */
+      aspect-ratio: 800 / 600; /* Maintain aspect ratio */
+      margin: 10px 0;
+      border: 1px solid #0f0; /* Slightly thinner border on mobile */
+      box-shadow: 0 0 10px #0f0; /* Slightly smaller shadow */
+  }
+
+  #ui-container {
+      width: 95%;
+      padding: 5px 0;
+      margin-bottom: 10px;
+      border-left: 1px solid #0f0;
+      border-right: 1px solid #0f0;
+      border-bottom: 1px solid #0f0;
+      box-shadow: 0 2px 5px #0f0;
+      flex-direction: column; /* Stack UI panels on smaller screens */
+      align-items: center;
+      gap: 5px;
+  }
+
+  .ui-panel {
+      font-size: 0.9em; /* Slightly smaller font on mobile */
+      padding: 5px;
+      width: 80%; /* Make UI panels wider */
+      justify-content: space-between; /* Distribute elements within panel */
+  }
+
+  #laser-cooldown-container {
+      width: 80px; /* Slightly smaller cooldown bar */
+      height: 10px;
+  }
+
+  #hyperspace-button {
+      padding: 3px 8px;
+      font-size: 0.8em;
+  }
+
+  #spaceship {
+      width: 20px;
+      height: 27px;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-bottom: 27px solid #00f0ff;
+  }
+
+  #propellant {
+      border-left: 3px solid transparent;
+      border-right: 3px solid transparent;
+      bottom: -13px;
+  }
+
+  .asteroid {
+      border-radius: 15%; /* Adjust border-radius for smaller size */
+  }
+
+  .fragment {
+      border-radius: 20%; /* Adjust border-radius for smaller size */
+  }
+
+  #game-over-screen {
+      padding: 20px;
+      border: 1px solid #ff0000;
+      box-shadow: 0 0 10px #ff0000;
+  }
+
+  #game-over-screen h1 {
+      font-size: 1.5em;
+  }
+
+  #game-over-screen p {
+      font-size: 1em;
+  }
+
+  #restart-button {
+      padding: 8px 15px;
+      font-size: 0.9em;
+      margin-top: 15px;
+  }
+}
