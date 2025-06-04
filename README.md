@@ -17,6 +17,8 @@ A retro-futuristic arcade game where you pilot a spaceship through a dangerous a
 * **Game Over & Restart:** See your final score and jump back into the action.
 * **Hyperspace Jump (Bonus):** Teleport randomly to escape tight spots, but beware of rare malfunctions!
 
+<img height="100px" width="100%" src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExdHh4aDhsMHF6dmI4b3pybWR2bWlhdDJ2dXI0bzBjanAxaDdtZzdzZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/TIj8cbzWYKnE9ul3ab/giphy.gif"  />
+
 ## 🎮 Controls
 
 ### Desktop (Keyboard)
