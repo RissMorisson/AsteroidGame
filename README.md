@@ -89,6 +89,6 @@ No special build steps or dependencies are required.
 This project is open source and available under the [MIT License](LICENSE.md).
 *(You'll need to create a `LICENSE.md` file with the MIT License text if you choose this license. You can easily find templates online for it.)*
 
----
+<img height="100px" width="100%" src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExdHh4aDhsMHF6dmI4b3pybWR2bWlhdDJ2dXI0bzBjanAxaDdtZzdzZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/TIj8cbzWYKnE9ul3ab/giphy.gif"  />
 
 Feel free to customize this README further with more details about your specific implementation or any personal touches!
