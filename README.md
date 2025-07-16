@@ -89,4 +89,3 @@ No special build steps or dependencies are required.
 ## 📄 License
 
 This project is open source and available under the [MIT License](LICENSE.md).
-*(You'll need to create a `LICENSE.md` file with the MIT License text if you choose this license. You can easily find templates online for it.)*
